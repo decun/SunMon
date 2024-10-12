@@ -1,0 +1,30 @@
+.node {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 128, 0, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .node:hover {
+    transform: scale(1.2);
+  }
+  
+  .tooltip {
+    display: none;
+  }
+  
+  .node:hover .tooltip {
+    display: block;
+    position: absolute;
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    top: -25px;
+    left: -10px;
+    white-space: nowrap;
+  }
+  
