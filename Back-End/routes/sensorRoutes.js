@@ -1,8 +1,13 @@
 // routes/sensorRoutes.js
 const express = require('express');
 const router = express.Router();
-const { addSensorData } = require('../controllers/sensorController'); // Asegúrate que esté correctamente importada
+const { getPhotos } = require('../controllers/photoController');
+const { getTemperatures } = require('../controllers/temperatureController');
 
-router.post('/', addSensorData); // Aquí definimos la ruta POST para los datos del sensor
+// Ruta para obtener fotos
+router.get('/photos', getPhotos);
+
+// Ruta para obtener temperaturas
+router.get('/temperatures', getTemperatures);
 
 module.exports = router;
