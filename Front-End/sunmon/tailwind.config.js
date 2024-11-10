@@ -4,8 +4,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        'chart': '300px'
+      }
+    }
   },
-  plugins: [],
-}
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
+};
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PanelDataView from './PanelDataView';
-import './MapView.css'; // Puedes usar un archivo CSS para manejar el posicionamiento
+import './MapView.css';
 
-const MapView = () => {
+const MapView = ({ temperatures, photos, voltages }) => {
   const [selectedPanel, setSelectedPanel] = useState(null);
 
   const handlePanelClick = (panelId) => {
@@ -15,14 +15,11 @@ const MapView = () => {
         <>
           <h2 className="text-2xl font-semibold mb-4">Solar Panel Locations</h2>
           <div className="bg-gray-300 h-96 rounded-lg relative">
-            {/* Imagen del mapa */}
             <img
               src={`${process.env.PUBLIC_URL}/images/Map.jpg`}
               alt="Solar Panels Map"
               className="w-full h-full object-cover"
             />
-            
-            {/* Nodos interactivos */}
             <div className="node" style={{ top: '70%', left: '30%' }} onClick={() => handlePanelClick(1)}>
               <span className="tooltip">Panel #1</span>
             </div>
@@ -35,7 +32,7 @@ const MapView = () => {
           </div>
         </>
       ) : (
-        <PanelDataView panelId={selectedPanel} />
+        <PanelDataView panelId={selectedPanel} data={temperatures} photos={photos} voltages={voltages} />
       )}
     </div>
   );

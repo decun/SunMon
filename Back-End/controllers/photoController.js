@@ -1,13 +1,13 @@
 // controllers/photoController.js
 const { MongoClient } = require('mongodb');
 
-const uri = "mongodb+srv://fevgaray:I46NseN9caK7Jq1q@sunmoncluster.oq80t.mongodb.net/?retryWrites=true&w=majority&appName=SunMonCluster";
+const uri = "mongodb+srv://fevgaray:nfeLBgBJI0Q9yM95@sunmoncluster.oq80t.mongodb.net/?retryWrites=true&w=majority&appName=SunMonCluster";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const getPhotos = async (req, res) => {
   try {
     await client.connect();
-    const photosCollection = client.db("weather_data").collection("photos");
+    const photosCollection = client.db("pv_data").collection("photos");
 
     const photos = await photosCollection.find().toArray();
     res.status(200).json(photos);

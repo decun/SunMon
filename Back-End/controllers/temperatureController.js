@@ -11,7 +11,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const getTemperatures = async (req, res) => {
     try {
         await client.connect();
-        const temperaturesCollection = client.db("weather_data").collection("Temperatures");
+        const temperaturesCollection = client.db("pv_data").collection("weather");
 
         // Obtener los datos directamente sin transformar mucho
         const temperatures = await temperaturesCollection.find().toArray();

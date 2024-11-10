@@ -1,39 +1,36 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import TemperatureChart from './TemperatureChart';
+import VoltageChart from './VoltageChart';
 
-const data = [
-  { name: '00:00', temperatura: 25, irradiacion: 0, corriente: 0, voltaje: 0 },
-  { name: '06:00', temperatura: 27, irradiacion: 200, corriente: 2, voltaje: 12 },
-  { name: '12:00', temperatura: 32, irradiacion: 800, corriente: 8, voltaje: 24 },
-  { name: '18:00', temperatura: 28, irradiacion: 100, corriente: 1, voltaje: 6 },
-  { name: '23:59', temperatura: 26, irradiacion: 0, corriente: 0, voltaje: 0 },
-];
+const PanelDataView = ({ panelId, data, photos = [], voltages = [] }) => {
+  // Obtener la última foto
+  const lastPhoto = photos.length > 0 ? photos[photos.length - 1] : null;
 
-const PanelDataView = ({ panelId }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-semibold mb-4">Panel #{panelId} Data View</h2>
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-1">
           <h3 className="text-lg font-semibold mb-2">Temperature</h3>
-          <LineChart width={300} height={200} data={data}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="temperatura" stroke="#8884d8" />
-          </LineChart>
+          <TemperatureChart data={data} />
+        </div>
+        <div className="col-span-1">
+          <h3 className="text-lg font-semibold mb-2">Voltage</h3>
+          <VoltageChart data={voltages} />
         </div>
         <div className="col-span-1 row-span-2">
           <h3 className="text-lg font-semibold mb-2">Problem Detection Image</h3>
           <div className="bg-gray-200 h-full flex items-center justify-center">
-            {/* Reemplazamos el texto placeholder por la imagen */}
-            <img
-              src={`${process.env.PUBLIC_URL}/images/panel2.png`}
-              alt="Panel Solar"
-              className="w-full h-full object-cover"
-            />
+            {lastPhoto ? (
+              <img
+                src={`data:image/jpeg;base64,${lastPhoto.photo}`}
+                alt="Panel Solar"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <p>No hay imagen disponible</p>
+            )}
           </div>
         </div>
         <div className="col-span-1">
@@ -60,7 +57,7 @@ const PanelDataView = ({ panelId }) => {
             <Line yAxisId="right" type="monotone" dataKey="voltaje" stroke="#82ca9d" />
           </LineChart>
         </div>
-        <div className="col-span-1 mt-6"> {/* Ajuste aquí */}
+        <div className="col-span-1 mt-6">
           <h3 className="text-lg font-semibold mb-2">Panel Info</h3>
           <div className="bg-gray-100 p-4 rounded">
             <p><strong>Diagnostic Summary:</strong></p>
